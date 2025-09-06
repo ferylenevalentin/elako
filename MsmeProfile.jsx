@@ -1,12 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import MsmeSidebar from './MsmeSidebar'; // Import the sidebar component
 import './MsmeProfile.css'; // Import CSS for styling
+import profileImg from '../assets/514479159_1278786266921537_9000017818585613959_n.jpg';
 
 const MsmeProfile = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+
+  const handleSidebarToggle = (isOpen) => {
+    setIsSidebarOpen(isOpen);
+  };
+
   return (
     <div className="profile-container">
-      <MsmeSidebar /> {/* Sidebar displayed first */}
-      <div className="profile-content">
+      <MsmeSidebar onSidebarToggle={handleSidebarToggle} /> {/* Sidebar displayed first */}
+      <div className={`profile-content ${isSidebarOpen ? 'sidebar-open' : 'sidebar-closed'}`}>
         <header className="profile-header">
           <h1>Profile Settings</h1>
         </header>
@@ -15,7 +22,7 @@ const MsmeProfile = () => {
             <h2>Personal Information</h2>
             <div className="info-card">
               <div className="profile-picture">
-                <img src="profile-picture.jpg" alt="Profile" />
+                <img src={profileImg} alt="Profile" />
               </div>
               <div className="info-fields">
                 <p><strong>Full Name:</strong> Maria's MSME</p>
@@ -25,14 +32,6 @@ const MsmeProfile = () => {
                 <p><strong>Bio:</strong> Passionate about creating quality handmade products and supporting local communities.</p>
               </div>
               <button className="edit-profile-button">Edit Profile</button>
-            </div>
-          </div>
-          <div className="statistics">
-            <h2>Statistics</h2>
-            <div className="stats-card">
-              <p><strong>Products Listed:</strong> 15</p>
-              <p><strong>Total Sales:</strong> ₱45,230</p>
-              <p><strong>Customer Reviews:</strong> 4.8/5</p>
             </div>
           </div>
         </section>

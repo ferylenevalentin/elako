@@ -8,11 +8,11 @@ import MailIcon from '@mui/icons-material/Mail';
 import PersonIcon from '@mui/icons-material/Person';
 import LogoutIcon from '@mui/icons-material/Logout';
 import MenuIcon from '@mui/icons-material/Menu';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
-const MsmeSidebar = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Sidebar is hidden by default
+const MsmeSidebar = ({ onSidebarToggle }) => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true); // Start with sidebar open
   const [isMobileView, setIsMobileView] = useState(false);
   const location = useLocation(); // Get the current route
 
@@ -20,8 +20,10 @@ const MsmeSidebar = () => {
   useEffect(() => {
     const handleResize = () => {
       setIsMobileView(window.innerWidth <= 768);
-      if (window.innerWidth > 768) {
-        setIsSidebarOpen(true); // Always show sidebar in desktop view
+      if (window.innerWidth <= 768) {
+        setIsSidebarOpen(false); // Start collapsed on mobile
+      } else {
+        setIsSidebarOpen(true); // Start expanded on desktop
       }
     };
 
@@ -30,6 +32,13 @@ const MsmeSidebar = () => {
 
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  // Notify parent component when sidebar state changes
+  useEffect(() => {
+    if (onSidebarToggle) {
+      onSidebarToggle(isSidebarOpen);
+    }
+  }, [isSidebarOpen, onSidebarToggle]);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -45,55 +54,66 @@ const MsmeSidebar = () => {
       )}
 
       {/* Sidebar */}
-      <div className={`sidebar ${isSidebarOpen ? 'open' : 'closed'}`}>
+      <div className={`sidebar ${isSidebarOpen ? 'open' : 'closed'} ${isMobileView ? 'mobile' : 'desktop'}`}>
         <div className="sidebar-header">
           {isMobileView && isSidebarOpen && (
             <button className="back-arrow" onClick={toggleSidebar}>
-              <ArrowBackIcon />
+              <ChevronLeftIcon />
             </button>
           )}
           {!isMobileView && (
             <button className="desktop-toggle" onClick={toggleSidebar}>
-              {isSidebarOpen ? <ArrowBackIcon /> : <ArrowForwardIcon />}
+              {isSidebarOpen ? <ChevronLeftIcon /> : <ChevronRightIcon />}
             </button>
           )}
-          <h2>Maria's MSME</h2>
-          <p>MSME Business</p>
+          {isSidebarOpen && (
+            <div className="sidebar-title">
+              <h2>Maria's MSME</h2>
+              <p>MSME Business</p>
+            </div>
+          )}
         </div>
         <nav className="sidebar-nav">
           <ul>
             <li className={location.pathname === '/dashboard' ? 'active' : ''}>
-              <Link to="/dashboard">
-                <DashboardIcon className="icon" /> Dashboard
+              <Link to="/dashboard" title="Dashboard">
+                <DashboardIcon className="icon" />
+                {isSidebarOpen && <span className="nav-text">Dashboard</span>}
               </Link>
             </li>
             <li className={location.pathname === '/manage-products' ? 'active' : ''}>
-              <Link to="/manage-products">
-                <InventoryIcon className="icon" /> Manage Products
+              <Link to="/manage-products" title="Manage Products">
+                <InventoryIcon className="icon" />
+                {isSidebarOpen && <span className="nav-text">Manage Products</span>}
               </Link>
             </li>
             <li className={location.pathname === '/analytics' ? 'active' : ''}>
-              <Link to="/analytics">
-                <AnalyticsIcon className="icon" /> Growth & Analytics
+              <Link to="/analytics" title="Growth & Analytics">
+                <AnalyticsIcon className="icon" />
+                {isSidebarOpen && <span className="nav-text">Growth & Analytics</span>}
               </Link>
             </li>
             <li className={location.pathname === '/messages' ? 'active' : ''}>
-              <Link to="/messages">
-                <MailIcon className="icon" /> Messages
+              <Link to="/messages" title="Messages">
+                <MailIcon className="icon" />
+                {isSidebarOpen && <span className="nav-text">Messages</span>}
               </Link>
             </li>
             <li className={location.pathname === '/profile' ? 'active' : ''}>
-              <Link to="/profile">
-                <PersonIcon className="icon" /> Profile
+              <Link to="/profile" title="Profile">
+                <PersonIcon className="icon" />
+                {isSidebarOpen && <span className="nav-text">Profile</span>}
               </Link>
             </li>
           </ul>
         </nav>
-        <div className="sidebar-footer">
-          <button className="logout-button">
-            <LogoutIcon className="icon" /> Logout
-          </button>
-        </div>
+        {isSidebarOpen && (
+          <div className="sidebar-footer">
+            <button className="logout-button">
+              <LogoutIcon className="icon" /> Logout
+            </button>
+          </div>
+        )}
       </div>
     </>
   );

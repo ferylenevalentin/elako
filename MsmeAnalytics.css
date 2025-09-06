@@ -7,9 +7,17 @@
 .analytics-content {
   flex-grow: 1;
   padding: 20px;
-  margin-left: 250px; /* Respect sidebar width */
   background-color: #f9f9f9;
   overflow-y: auto;
+  transition: margin-left 0.3s ease-in-out;
+}
+
+.analytics-content.sidebar-open {
+  margin-left: 250px; /* Full sidebar width */
+}
+
+.analytics-content.sidebar-closed {
+  margin-left: 80px; /* Collapsed sidebar width */
 }
 
 .analytics-header {
@@ -54,48 +62,61 @@
 
 .stat-card span {
   font-size: 14px;
-  color: #7ed957;
+  color: #01a477;
 }
 
 .analytics-details {
   display: flex;
   gap: 20px;
+  flex-wrap: wrap;
 }
 
-.sales-trend,
+.chart-container,
 .product-performance {
   flex: 1;
+  min-width: 400px;
   background-color: #fff;
-  padding: 15px;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.sales-trend h3,
+.chart-container h3,
 .product-performance h3 {
   font-size: 18px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+  color: #333;
+  font-weight: 600;
+  align-self: flex-start;
 }
 
-.sales-trend ul,
-.product-performance ul {
-  list-style: none;
-  padding: 0;
+.chart-container {
+  min-height: 350px;
 }
 
-.sales-trend li,
-.product-performance li {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 5px;
-  font-size: 16px;
+.product-performance {
+  min-height: 350px;
+  justify-content: flex-start;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .analytics-content {
+  .analytics-content.sidebar-open,
+  .analytics-content.sidebar-closed {
     margin-left: 0; /* Remove margin for smaller screens */
     padding: 15px;
+    padding-top: 70px; /* Add space for burger menu */
+  }
+
+  .analytics-header {
+    margin-top: 10px; /* Additional spacing from burger menu */
+  }
+
+  .analytics-header h1 {
+    font-size: 20px; /* Slightly smaller on mobile */
   }
 
   .analytics-details {

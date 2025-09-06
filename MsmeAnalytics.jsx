@@ -1,22 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import MsmeSidebar from './MsmeSidebar'; // Import the sidebar component
 import './MsmeAnalytics.css'; // Import CSS for styling
+import { BarChart } from '@mui/x-charts/BarChart';
+import { LineChart } from '@mui/x-charts/LineChart';
 
 const MsmeAnalytics = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+
+  const handleSidebarToggle = (isOpen) => {
+    setIsSidebarOpen(isOpen);
+  };
+
   return (
     <div className="analytics-container">
-      <MsmeSidebar /> {/* Sidebar displayed first */}
-      <div className="analytics-content">
+      <MsmeSidebar onSidebarToggle={handleSidebarToggle} /> {/* Sidebar displayed first */}
+      <div className={`analytics-content ${isSidebarOpen ? 'sidebar-open' : 'sidebar-closed'}`}>
         <header className="analytics-header">
           <h1>Growth & Analytics</h1>
           <p>Track your business performance and growth opportunities.</p>
         </header>
         <section className="analytics-stats">
-          <div className="stat-card">
-            <h2>Monthly Revenue</h2>
-            <p>₱32,000</p>
-            <span>+28% Compared to last month</span>
-          </div>
           <div className="stat-card">
             <h2>Profile Views</h2>
             <p>1,847</p>
@@ -34,25 +37,72 @@ const MsmeAnalytics = () => {
           </div>
         </section>
         <section className="analytics-details">
-          <div className="sales-trend">
-            <h3>Sales & Orders Trend</h3>
-            <ul>
-              <li>Jan <span>₱12K sales</span> <span>45 orders</span></li>
-              <li>Feb <span>₱15K sales</span> <span>52 orders</span></li>
-              <li>Mar <span>₱18K sales</span> <span>61 orders</span></li>
-              <li>Apr <span>₱22K sales</span> <span>78 orders</span></li>
-              <li>May <span>₱28K sales</span> <span>89 orders</span></li>
-              <li>Jun <span>₱32K sales</span> <span>95 orders</span></li>
-            </ul>
+          <div className="chart-container">
+            <h3>Monthly Performance Trends</h3>
+            <BarChart
+              width={600}
+              height={300}
+              series={[
+                {
+                  data: [1200, 1350, 1500, 1650, 1750, 1847],
+                  label: 'Profile Views',
+                  color: '#01a477',
+                },
+                {
+                  data: [320, 350, 380, 410, 430, 456],
+                  label: 'Followers',
+                  color: '#92e575',
+                },
+                {
+                  data: [4.2, 4.3, 4.4, 4.6, 4.7, 4.8],
+                  label: 'Avg Rating',
+                  color: '#023c1a',
+                },
+              ]}
+              xAxis={[
+                {
+                  data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                  scaleType: 'band',
+                },
+              ]}
+              margin={{ top: 10, bottom: 30, left: 40, right: 10 }}
+            />
           </div>
           <div className="product-performance">
             <h3>Product Performance</h3>
-            <ul>
-              <li>Buko Pie <span>35%</span></li>
-              <li>Coffee Beans <span>25%</span></li>
-              <li>Banana Chips <span>20%</span></li>
-              <li>Others <span>20%</span></li>
-            </ul>
+            <LineChart
+              width={600}
+              height={300}
+              series={[
+                {
+                  data: [28, 30, 32, 35, 33, 35],
+                  label: 'Buko Pie',
+                  color: '#01a477',
+                },
+                {
+                  data: [20, 22, 24, 25, 26, 25],
+                  label: 'Coffee Beans',
+                  color: '#92e575',
+                },
+                {
+                  data: [18, 19, 20, 20, 21, 20],
+                  label: 'Banana Chips',
+                  color: '#023c1a',
+                },
+                {
+                  data: [34, 29, 24, 20, 20, 20],
+                  label: 'Others',
+                  color: '#313131',
+                },
+              ]}
+              xAxis={[
+                {
+                  data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                  scaleType: 'point',
+                },
+              ]}
+              margin={{ top: 10, bottom: 30, left: 40, right: 10 }}
+            />
           </div>
         </section>
       </div>

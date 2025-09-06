@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import MsmeSidebar from './MsmeSidebar'; // Import the sidebar component
 import './MsmeMessage.css'; // Import CSS for styling
 
 const MsmeMessage = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+
+  const handleSidebarToggle = (isOpen) => {
+    setIsSidebarOpen(isOpen);
+  };
+
   return (
     <div className="message-container">
-      <MsmeSidebar /> {/* Sidebar displayed first */}
-      <div className="message-content">
+      <MsmeSidebar onSidebarToggle={handleSidebarToggle} /> {/* Sidebar displayed first */}
+      <div className={`message-content ${isSidebarOpen ? 'sidebar-open' : 'sidebar-closed'}`}>
         <header className="message-header">
           <h1>Messages</h1>
           <input type="text" placeholder="Search conversations..." className="search-input" />

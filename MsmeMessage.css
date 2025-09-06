@@ -7,9 +7,17 @@
 .message-content {
   flex-grow: 1;
   padding: 20px;
-  margin-left: 250px; /* Respect sidebar width */
   background-color: #f9f9f9;
   overflow-y: auto;
+  transition: margin-left 0.3s ease-in-out;
+}
+
+.message-content.sidebar-open {
+  margin-left: 250px; /* Full sidebar width */
+}
+
+.message-content.sidebar-closed {
+  margin-left: 80px; /* Collapsed sidebar width */
 }
 
 .message-header {
@@ -149,9 +157,19 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .message-content {
+  .message-content.sidebar-open,
+  .message-content.sidebar-closed {
     margin-left: 0; /* Remove margin for smaller screens */
     padding: 15px;
+    padding-top: 70px; /* Add space for burger menu */
+  }
+
+  .message-header {
+    margin-top: 10px; /* Additional spacing from burger menu */
+  }
+
+  .message-header h1 {
+    font-size: 20px; /* Slightly smaller on mobile */
   }
 
   .message-body {
