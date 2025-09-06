@@ -1,17 +1,81 @@
 .dashboard-container {
   display: flex;
-  height: 100vh; /* Ensure the container takes the full viewport height */
-  width: 100vw; /* Ensure the container takes the full viewport width */
+  height: 100vh; /* Full viewport height */
+  width: 100vw; /* Full viewport width */
+}
+
+.sidebar {
+  width: 250px;
+  background-color: #fff; /* Sidebar background is white */
+  color: #313131; /* Text color is dark for contrast */
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1000;
+  transition: transform 0.3s ease-in-out;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add subtle shadow for better visibility */
+}
+
+.sidebar.hidden {
+  transform: translateX(-100%); /* Hide sidebar */
+}
+
+.sidebar.visible {
+  transform: translateX(0); /* Show sidebar */
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar ul li {
+  padding: 15px 20px;
+  font-size: 16px;
+  color: #313131; /* Ensure text is visible */
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.sidebar ul li:hover {
+  background-color: #f0f0f0; /* Add hover effect for better visibility */
+}
+
+.burger-menu {
+  display: none;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1100;
+  background-color: #fff; /* Ensure burger menu matches sidebar */
+  color: #313131;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
 }
 
 .dashboard-content {
   flex-grow: 1;
-  padding: 20px; /* Add spacing from the sidebar */
-  margin-left: 250px; /* Respect the sidebar width */
+  padding: 20px; /* Add spacing */
   background-color: #f9f9f9;
   overflow-y: auto;
-  height: 100%; /* Ensure the content fills the remaining height */
-  width: calc(100vw - 250px); /* Dynamically calculate width to fill remaining space */
+  height: 100%; /* Fill remaining height */
+  display: flex;
+  flex-direction: column; /* Stack content vertically */
+  gap: 20px; /* Add spacing between sections */
+  transition: margin-left 0.3s ease-in-out; /* Smooth transition for margin */
+}
+
+.dashboard-content.sidebar-visible {
+  margin-left: 250px; /* Adjust content when sidebar is visible */
+}
+
+.dashboard-content.sidebar-hidden {
+  margin-left: 0; /* Adjust content when sidebar is hidden */
 }
 
 .dashboard-header {
@@ -45,13 +109,12 @@
 }
 
 .dashboard-stats {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid */
   gap: 20px;
-  margin-bottom: 20px;
 }
 
 .stat-card {
-  flex: 1;
   background-color: #fff;
   padding: 15px;
   border-radius: 5px;
@@ -76,14 +139,13 @@
 }
 
 .dashboard-details {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
   gap: 20px;
-  margin-bottom: 20px;
 }
 
 .recent-orders,
 .top-products {
-  flex: 1;
   background-color: #fff;
   padding: 15px;
   border-radius: 5px;
@@ -136,13 +198,12 @@
 }
 
 .dashboard-insights {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
   gap: 20px;
-  margin-bottom: 20px;
 }
 
 .insight-card {
-  flex: 1;
   background-color: #fff;
   padding: 15px;
   border-radius: 5px;
@@ -202,32 +263,16 @@
     width: 100%; /* Ensure content fills the screen width */
   }
 
-  .dashboard-header h1 {
-    font-size: 20px; /* Adjust font size for smaller screens */
+  .burger-menu {
+    display: block; /* Show burger menu in mobile view */
   }
 
-  .dashboard-header p {
-    font-size: 14px; /* Adjust font size for smaller screens */
+  .sidebar {
+    transform: translateX(-100%); /* Hide sidebar by default */
   }
 
-  .dashboard-stats {
-    flex-direction: column; /* Stack stats vertically */
-    gap: 15px;
-  }
-
-  .dashboard-details {
-    flex-direction: column; /* Stack details vertically */
-    gap: 15px;
-  }
-
-  .dashboard-insights {
-    flex-direction: column; /* Stack insights vertically */
-    gap: 15px;
-  }
-
-  .actions {
-    flex-direction: column; /* Stack quick actions vertically */
-    gap: 10px;
+  .sidebar.visible {
+    transform: translateX(0); /* Show sidebar when visible */
   }
 }
 

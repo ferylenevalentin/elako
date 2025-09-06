@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom'; // Import Link and useLocation for navigation
 import './MsmeSidebar.css'; // Import the CSS file for styling
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import InventoryIcon from '@mui/icons-material/Inventory';
@@ -13,6 +14,7 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 const MsmeSidebar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Sidebar is hidden by default
   const [isMobileView, setIsMobileView] = useState(false);
+  const location = useLocation(); // Get the current route
 
   // Detect screen size and update state
   useEffect(() => {
@@ -60,20 +62,30 @@ const MsmeSidebar = () => {
         </div>
         <nav className="sidebar-nav">
           <ul>
-            <li className="active">
-              <DashboardIcon className="icon" /> Dashboard
+            <li className={location.pathname === '/dashboard' ? 'active' : ''}>
+              <Link to="/dashboard">
+                <DashboardIcon className="icon" /> Dashboard
+              </Link>
             </li>
-            <li>
-              <InventoryIcon className="icon" /> Manage Products
+            <li className={location.pathname === '/manage-products' ? 'active' : ''}>
+              <Link to="/manage-products">
+                <InventoryIcon className="icon" /> Manage Products
+              </Link>
             </li>
-            <li>
-              <AnalyticsIcon className="icon" /> Growth & Analytics
+            <li className={location.pathname === '/analytics' ? 'active' : ''}>
+              <Link to="/analytics">
+                <AnalyticsIcon className="icon" /> Growth & Analytics
+              </Link>
             </li>
-            <li>
-              <MailIcon className="icon" /> Messages
+            <li className={location.pathname === '/messages' ? 'active' : ''}>
+              <Link to="/messages">
+                <MailIcon className="icon" /> Messages
+              </Link>
             </li>
-            <li>
-              <PersonIcon className="icon" /> Profile
+            <li className={location.pathname === '/profile' ? 'active' : ''}>
+              <Link to="/profile">
+                <PersonIcon className="icon" /> Profile
+              </Link>
             </li>
           </ul>
         </nav>

@@ -9,24 +9,13 @@ const MsmeDashboard = () => {
       <div className="dashboard-content">
         <header className="dashboard-header">
           <h1>Welcome back, Maria's MSME!</h1>
-          <p>Here's how your business is performing today.</p>
           <button className="customize-button">Customize</button>
         </header>
         <section className="dashboard-stats">
           <div className="stat-card">
-            <h2>Total Sales</h2>
-            <p>₱45,230</p>
-            <span>+12% from last month</span>
-          </div>
-          <div className="stat-card">
             <h2>Page Views</h2>
             <p>2,847</p>
             <span>+8% from last month</span>
-          </div>
-          <div className="stat-card">
-            <h2>Orders</h2>
-            <p>156</p>
-            <span>+23% from last month</span>
           </div>
           <div className="stat-card">
             <h2>Rating</h2>
@@ -34,38 +23,25 @@ const MsmeDashboard = () => {
             <span>0% from last month</span>
           </div>
         </section>
-        <section className="dashboard-details">
-          <div className="recent-orders">
-            <h3>Recent Orders</h3>
+        <section className="dashboard-stats">
+          <div className="stat-card">
+            <h2>Top Products by Ratings</h2>
             <ul>
-              <li>#1234 <span className="status completed">completed</span> ₱250</li>
-              <li>#1235 <span className="status processing">processing</span> ₱640</li>
-              <li>#1236 <span className="status shipped">shipped</span> ₱850</li>
-              <li>#1237 <span className="status pending">pending</span> ₱600</li>
-            </ul>
-          </div>
-          <div className="top-products">
-            <h3>Top Products</h3>
-            <ul>
-              <li>#1 Buko Pie <span>₱11,250</span></li>
-              <li>#2 Coffee Beans <span>₱10,240</span></li>
-              <li>#3 Handwoven Shirt <span>₱15,300</span></li>
-              <li>#4 Banana Chips <span>₱3,360</span></li>
+              <li>#1 Buko Pie <span>Rating: 4.9</span></li>
+              <li>#2 Coffee Beans <span>Rating: 4.8</span></li>
+              <li>#3 Handwoven Shirt <span>Rating: 4.7</span></li>
+              <li>#4 Banana Chips <span>Rating: 4.6</span></li>
             </ul>
           </div>
         </section>
         <section className="dashboard-insights">
           <div className="insight-card">
-            <h4>Peak Sales Hours</h4>
-            <p>Most orders come in between 2-4 PM</p>
+            <h4>Peak Customer Engagement</h4>
+            <p>Most customer interactions occur between 2-4 PM</p>
           </div>
           <div className="insight-card">
             <h4>Growth Opportunity</h4>
             <p>Consider adding more coffee varieties</p>
-          </div>
-          <div className="insight-card">
-            <h4>Inventory Alert</h4>
-            <p>Buko pie ingredients running low</p>
           </div>
         </section>
         <section className="quick-actions">

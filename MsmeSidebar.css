@@ -63,15 +63,22 @@ body {
 
 .sidebar-nav li {
   padding: 15px 20px;
+  font-size: 16px;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  opacity: 1;
-  transition: opacity 0.3s ease-in-out;
+  transition: background-color 0.3s ease-in-out;
 }
 
-.sidebar.closed .sidebar-nav li {
-  opacity: 0; /* Hide list items when sidebar is closed */
+.sidebar-nav ul li a {
+  text-decoration: none;
+  color: #000; /* Make links permanently black */
+}
+
+.sidebar-nav ul li.active a {
+  font-weight: bold; /* Highlight active links */
+}
+
+.sidebar-nav ul li:hover a {
+  color: #000; /* Ensure hover does not change color */
 }
 
 .sidebar-nav li.active {

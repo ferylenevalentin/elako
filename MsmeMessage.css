@@ -1,0 +1,164 @@
+.message-container {
+  display: flex;
+  height: 100vh; /* Full viewport height */
+  width: 100vw; /* Full viewport width */
+}
+
+.message-content {
+  flex-grow: 1;
+  padding: 20px;
+  margin-left: 250px; /* Respect sidebar width */
+  background-color: #f9f9f9;
+  overflow-y: auto;
+}
+
+.message-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.message-header h1 {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.search-input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 300px;
+}
+
+.message-body {
+  display: flex;
+  gap: 20px;
+}
+
+.conversation-list {
+  flex: 1;
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.conversation-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+.conversation {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+}
+
+.conversation.active {
+  background-color: #f0f0f0;
+}
+
+.conversation h3 {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.conversation p {
+  font-size: 14px;
+  color: #666;
+}
+
+.conversation span {
+  font-size: 12px;
+  color: #999;
+}
+
+.chat-window {
+  flex: 2;
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-messages {
+  flex-grow: 1;
+  overflow-y: auto;
+  margin-bottom: 10px;
+}
+
+.message {
+  margin-bottom: 10px;
+}
+
+.message.received {
+  text-align: left;
+}
+
+.message.sent {
+  text-align: right;
+}
+
+.message p {
+  display: inline-block;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #f0f0f0;
+  margin: 0;
+}
+
+.message.sent p {
+  background-color: #7ed957;
+  color: #fff;
+}
+
+.message span {
+  font-size: 12px;
+  color: #999;
+  display: block;
+  margin-top: 5px;
+}
+
+.chat-input {
+  display: flex;
+  gap: 10px;
+}
+
+.chat-input input {
+  flex-grow: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.send-button {
+  background-color: #313131;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.send-button:hover {
+  background-color: #7ed957;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .message-content {
+    margin-left: 0; /* Remove margin for smaller screens */
+    padding: 15px;
+  }
+
+  .message-body {
+    flex-direction: column; /* Stack conversations and chat window vertically */
+  }
+
+  .conversation-list {
+    margin-bottom: 20px;
+  }
+}
