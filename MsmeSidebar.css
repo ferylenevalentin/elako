@@ -1,0 +1,195 @@
+/* Apply Poppins font globally */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  background-color: #fff;
+  border-right: 1px solid #ddd;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  transition: transform 0.3s ease-in-out, width 0.3s ease-in-out;
+  transform: translateX(0);
+  z-index: 1000;
+}
+
+.sidebar.open {
+  transform: translateX(0); /* Sidebar visible */
+}
+
+.sidebar.closed {
+  width: 80px; /* Retracted width */
+  transform: translateX(0); /* Sidebar stays visible in desktop view */
+}
+
+.sidebar-header {
+  padding: 20px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sidebar-header h2,
+.sidebar-header p {
+  margin: 0;
+  font-size: 18px;
+  display: block;
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.sidebar.closed .sidebar-header h2,
+.sidebar.closed .sidebar-header p {
+  opacity: 0; /* Hide text when sidebar is closed */
+}
+
+.sidebar-nav {
+  flex-grow: 1;
+}
+
+.sidebar-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-nav li {
+  padding: 15px 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.sidebar.closed .sidebar-nav li {
+  opacity: 0; /* Hide list items when sidebar is closed */
+}
+
+.sidebar-nav li.active {
+  background-color: #f0f0f0;
+}
+
+.sidebar-nav li:hover {
+  background-color: #f9f9f9;
+}
+
+.sidebar-nav .icon {
+  margin-right: 10px;
+  font-size: 24px;
+}
+
+.sidebar-footer {
+  padding: 10px; /* Adjust padding */
+  border-top: 1px solid #ddd;
+  text-align: center; /* Center the logout button */
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.sidebar.closed .sidebar-footer {
+  opacity: 0; /* Hide logout button when sidebar is closed */
+}
+
+/* Buttons */
+.logout-button,
+.burger-menu,
+.back-arrow,
+.desktop-toggle {
+  background-color: #313131; /* Button color */
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Poppins', sans-serif;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.logout-button:hover,
+.burger-menu:hover,
+.back-arrow:hover,
+.desktop-toggle:hover {
+  background-color: #7ed957; /* Hover color */
+}
+
+.logout-button {
+  width: 100%;
+  padding: 8px; /* Adjust padding */
+  font-size: 14px; /* Adjust font size */
+}
+
+.logout-button .icon {
+  margin-right: 5px; /* Adjust spacing */
+  font-size: 20px; /* Adjust icon size */
+}
+
+/* Burger Menu */
+.burger-menu {
+  display: none;
+  position: fixed;
+  top: 15px;
+  left: 15px; /* Place burger menu in the upper-left corner */
+  z-index: 1100;
+  padding: 10px;
+  border-radius: 5px; /* Optional: Add rounded corners */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Optional: Add shadow for better visibility */
+}
+
+.burger-menu svg {
+  font-size: 20px; /* Adjust icon size */
+}
+
+/* Back Arrow */
+.back-arrow {
+  display: none; /* Hide back arrow by default */
+  font-size: 20px; /* Adjust icon size */
+}
+
+.desktop-toggle {
+  display: none; /* Hide desktop toggle in mobile view */
+  font-size: 20px; /* Adjust icon size */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-100%);
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .burger-menu {
+    display: block; /* Show burger menu in mobile view */
+  }
+
+  .back-arrow {
+    display: block; /* Show back arrow only when sidebar is open */
+  }
+}
+
+@media (min-width: 769px) {
+  .burger-menu {
+    display: none; /* Hide burger menu in desktop view */
+  }
+
+  .desktop-toggle {
+    display: block; /* Show desktop toggle in desktop view */
+  }
+
+  .sidebar {
+    transform: translateX(0); /* Sidebar always visible in desktop view */
+  }
+}
